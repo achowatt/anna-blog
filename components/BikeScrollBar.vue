@@ -388,7 +388,6 @@ export default {
       yPercent: -50,
       transformOrigin: "50% 50%"
     }); //center element on path
-    timeline.set("#yay", { opacity: 0 });
 
     timeline
       .to("#bicycle", 5, {

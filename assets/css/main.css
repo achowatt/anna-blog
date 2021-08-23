@@ -19,8 +19,7 @@ dd {
   margin: 0;
 }
 
-a:link,
-a:visited {
+a {
   text-decoration: none;
   color: inherit;
 }
@@ -44,6 +43,13 @@ body {
 
   background: rgb(255, 244, 228);
   color: rgb(71, 62, 80);
+
+  font-family: "Lato", sans-serif;
+
+  background-image: url("flower_flipped.png");
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-attachment: fixed;
 }
 
 /* A elements that don't have a class get default styles */
@@ -65,6 +71,15 @@ textarea,
 select {
   font: inherit;
 }
+html {
+  font-size: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 80%;
+  }
+}
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
@@ -83,5 +98,6 @@ select {
 }
 
 h1 {
-  font-size: 5rem;
+  font-size: 4rem;
+  font-family: broadacre-hairline-4, sans-serif;
 }

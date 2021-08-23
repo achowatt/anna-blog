@@ -1,7 +1,7 @@
 ---
 title: My third Blog Post
 description: Learning how to use @nuxt/content to create a blog
-img: first-blog-post.jpg
+img: https://res.cloudinary.com/djv69vvs7/image/upload/c_scale,w_695/v1629730831/paul-skorupskas-7KLa-xLbSXA-unsplash_ljdhta.jpg
 alt: my first blog post
 author:
   name: Miki
