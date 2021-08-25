@@ -8,16 +8,21 @@
       <AppSearchInput />
     </header>
     <div class="content-wrapper">
-      <div :class="[filterOpened ? 'active' : '', 'filter-container']">
-        <h2>Filter By Topics</h2>
-        <button>Javascript</button>
-        <button>Html</button>
-        <button>CSS</button>
-        <button>Accessibity</button>
-        <button>Performance</button>
-        <button>UX/UI</button>
-        <button>Animation</button>
-        <button>Life</button>
+      <div class="filter-container">
+        <h2 @click="toggleFilter">Filter</h2>
+        <transition name="fade">
+          <div v-show="showFilter">
+            <button>Javascript</button>
+            <button>Html</button>
+            <button>CSS</button>
+            <button>Accessibity</button>
+            <button>Performance</button>
+            <button>UX/UI</button>
+            <button>Animation</button>
+            <button>Life</button>
+            <button>All</button>
+          </div>
+        </transition>
       </div>
       <ul class="posts-container">
         <li v-for="article of articles" :key="article.slug">
@@ -43,7 +48,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      showFilter: false
+    };
   },
   async asyncData({ $content, params }) {
     const articles = await $content("articles")
@@ -54,6 +61,11 @@ export default {
     return {
       articles
     };
+  },
+  methods: {
+    toggleFilter() {
+      this.showFilter = !this.showFilter;
+    }
   }
 };
 </script>
@@ -67,6 +79,16 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 .blogs-container {
@@ -90,30 +112,13 @@ header {
   right: calc(((100vw - 1200px) / 2) + 1200px);
 }
 
-@media screen and (max-width: 1410px) {
-  .filter-container {
-    z-index: 3;
-    max-width: unset;
-    width: 100%;
-    height: 5rem;
-    left: 0;
-    bottom: 0;
-    margin-left: 0;
-    margin-top: 0;
-    /* transform: translateX(0); */
-    background: rgb(255, 255, 255);
-    border: 1px solid black;
-    /* display: none; */
-    overflow-x: scroll;
-    display: block;
-    display: flex;
-    align-items: center;
-  }
-}
-
 .filter-container h2 {
-  background: white;
   padding: 0.5rem;
+  color: orange;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(255, 236, 215, 0.678);
+  cursor: pointer;
 }
 
 .filter-container button {
@@ -126,6 +131,34 @@ header {
 
 .filter-container button:hover {
   background: rgb(255, 223, 163);
+}
+
+@media screen and (max-width: 1410px) {
+  .filter-container {
+    z-index: 3;
+    max-width: unset;
+    width: 100%;
+    height: unset;
+    left: 0;
+    bottom: 0;
+    margin-left: 0;
+    margin-top: 0;
+    /* transform: translateX(0); */
+    /* background: rgba(255, 255, 255, 0.699); */
+    /* border: 1px solid black; */
+    /* display: none; */
+    overflow-x: scroll;
+    display: flex;
+  }
+
+  .filter-container > div {
+    display: flex;
+    align-items: center;
+  }
+
+  .filter-container button {
+    background: rgba(253, 253, 253, 0.918);
+  }
 }
 
 .posts-container {
