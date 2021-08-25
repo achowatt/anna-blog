@@ -5,6 +5,7 @@
 
       <nav class="blog-nav">
         <ul>
+          <NuxtLink to="/blog" class="go-home">Back to blogs &#10548;</NuxtLink>
           <h4>On this page</h4>
           <li class="quick-links" v-for="link of article.toc" :key="link.id">
             <NuxtLink :to="`#${link.id}`">{{ link.text }}</NuxtLink>
@@ -70,6 +71,20 @@ export default {
   /* Remove scrollbar space */
 }
 
+a.go-home {
+  color: rgb(248, 3, 3);
+  display: block;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+  transition: all 0.3s;
+}
+
+a.go-home:hover {
+  transform: translateY(-3px);
+  transition: all 0.3s;
+}
+
 .blog-article {
   margin-left: clamp(17.5vh, 15%, 500px); /* min,preferred,max */
   display: flex;
@@ -85,7 +100,7 @@ export default {
 
 .blog-nav ul {
   position: sticky;
-  top: 4rem;
+  top: 2rem;
   left: 0;
   list-style: none;
 }

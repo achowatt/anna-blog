@@ -5,7 +5,7 @@
       <AppSearchInput />
     </header>
     <div class="content-wrapper">
-      <div class="topics-container">
+      <div class="filter-container active">
         <h2>Filter By Topics</h2>
         <button>Javascript</button>
         <button>Html</button>
@@ -65,27 +65,43 @@ header {
 
 .blogs-container {
   padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .content-wrapper {
   display: flex;
 }
 
-.topics-container {
-  min-width: 13rem;
-  max-width: 20rem;
-  width: 20%;
-  padding: 0 2rem 0 0;
+.filter-container {
+  max-width: 15rem;
+  width: 100%;
+  /* padding: 0 2rem 0 0; */
   margin-top: 1rem;
   text-align: center;
+  position: fixed;
+  right: calc(((100vw - 1200px) / 2) + 1200px);
 }
 
-.topics-container h2 {
+.filter-container.active {
+  max-width: 100%;
+  right: 0;
+  top: 0;
+  margin-top: 0;
+  transform: translateX(0);
+  background: white;
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+}
+
+.filter-container h2 {
   background: white;
   padding: 0.5rem;
 }
 
-.topics-container button {
+.filter-container button {
   border: none;
   width: 100%;
   padding: 0.7rem;
@@ -93,7 +109,7 @@ header {
   background: rgba(255, 255, 255, 0.479);
 }
 
-.topics-container button:hover {
+.filter-container button:hover {
   background: rgb(255, 223, 163);
 }
 
