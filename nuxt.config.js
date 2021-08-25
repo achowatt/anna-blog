@@ -49,7 +49,7 @@ export default {
     nestedProperties: ["author.name"],
     markdown: {
       prism: {
-        theme: "prism-themes/themes/prism-vsc-dark-plus.css"
+        theme: "prism-themes/themes/prism-duotone-earth.css"
       }
     }
   }

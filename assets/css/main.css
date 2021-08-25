@@ -44,12 +44,14 @@ body {
   background: rgb(255, 244, 228);
   color: rgb(71, 62, 80);
 
-  font-family: "Lato", sans-serif;
+  /* font-family: "Lato", sans-serif; */
+  font-family: poiret-one, sans-serif;
 
   background-image: url("flower_flipped.png");
   background-repeat: no-repeat;
   background-position: 100% 100%;
   background-attachment: fixed;
+  background-size: contain;
 }
 
 /* A elements that don't have a class get default styles */

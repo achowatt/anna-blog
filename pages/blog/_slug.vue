@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <main class="wrapper">
     <article class="blog-article">
       <BikeScrollBar />
 
@@ -18,28 +18,24 @@
           class="blog-img"
           :style="{ backgroundImage: `url(${article.img})` }"
         > -->
-        <h1>{{ article.title }}</h1>
         <!-- </div> -->
+        <h1>{{ article.title }}</h1>
         <p>{{ article.description }}</p>
         <p>Article last updated: {{ formatDate(article.updatedAt) }}</p>
 
         <nuxt-content :document="article" />
 
-        <author :author="article.author"></author>
         <prev-next :prev="prev" :next="next" />
-        <a href="https://www.freepik.com/vectors/flower"
-          >Flower vector created by coolvector - www.freepik.com</a
-        >
       </div>
     </article>
-  </div>
+  </main>
 </template>
 
 <script>
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default {
+  layout: "blog",
   async asyncData({ $content, params }) {
     const article = await $content("articles", params.slug).fetch();
 
@@ -61,8 +57,9 @@ export default {
       return new Date(date).toLocaleDateString("en", options);
     }
   },
-  beforeMount() {
-    // window.addEventListener("scroll", this.findScrollPosition);
+  mounted() {
+    gsap.set(".blog-nav", { xPercent: -100 });
+    gsap.to(".blog-nav", 1.5, { xPercent: 0 });
   }
 };
 </script>
@@ -77,11 +74,13 @@ export default {
   margin-left: clamp(17.5vh, 15%, 500px); /* min,preferred,max */
   display: flex;
   padding: 1rem;
+  min-height: 100vh;
 }
 
 .blog-nav {
   order: 2;
   width: 17rem;
+  background: rgba(255, 255, 255, 0.507);
 }
 
 .blog-nav ul {
@@ -110,7 +109,8 @@ export default {
   max-width: 1100px;
   box-shadow: 5px 5px 15px rgba(173, 172, 172, 0.507);
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.767);
+  background: rgb(255, 255, 255);
+  z-index: 2;
 }
 
 .blog-img {
@@ -129,7 +129,6 @@ export default {
 
 .blog-content h1 {
   text-shadow: 2px 2px #ffc400;
-  /* text-align: center; */
 }
 
 .blog-content img {
@@ -167,7 +166,12 @@ export default {
   font-weight: bold;
   font-size: 28px;
   margin-top: 3rem;
-  text-shadow: 2px 2px #ffc400;
+  /* color: #ffc400; */
+  font-family: broadacre-hairline-4, sans-serif;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #ffc400;
+  color: #ffc40067;
+  /* text-shadow: 2px 2px #ffc400; */
 }
 
 .nuxt-content h4 {
@@ -176,12 +180,15 @@ export default {
   text-shadow: 2px 2px #ffc400;
 }
 
-.nuxt .nuxt-content p {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+.nuxt-content-highlight {
+  position: relative;
 }
 
 .nuxt-content-highlight .filename {
-  color: pink;
+  color: rgba(15, 252, 201, 0.836);
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  font-size: 0.8rem;
 }
 </style>

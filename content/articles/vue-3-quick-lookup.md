@@ -371,7 +371,7 @@ its original state
 </transition>
 ```
 
-##Transition/ Animations
+## Transition/ Animations
 
 - transitions for rendering v-if, v-show, dynamic components, component root nodes
 
