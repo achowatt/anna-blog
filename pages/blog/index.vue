@@ -2,10 +2,13 @@
   <main class="blogs-container">
     <header>
       <h1>Blog Posts</h1>
+      <!-- <button class="filter-button" @click="toggleFilter()">
+        filter by topics
+      </button> -->
       <AppSearchInput />
     </header>
     <div class="content-wrapper">
-      <div class="filter-container active">
+      <div :class="[filterOpened ? 'active' : '', 'filter-container']">
         <h2>Filter By Topics</h2>
         <button>Javascript</button>
         <button>Html</button>
@@ -39,6 +42,9 @@
 
 <script>
 export default {
+  data() {
+    return {};
+  },
   async asyncData({ $content, params }) {
     const articles = await $content("articles")
       .only(["title", "description", "img", "slug", "author"])
@@ -76,24 +82,33 @@ header {
 
 .filter-container {
   max-width: 15rem;
-  width: 100%;
-  /* padding: 0 2rem 0 0; */
+  height: 7rem;
   margin-top: 1rem;
+  margin-left: 1rem;
   text-align: center;
   position: fixed;
   right: calc(((100vw - 1200px) / 2) + 1200px);
 }
 
-.filter-container.active {
-  max-width: 100%;
-  right: 0;
-  top: 0;
-  margin-top: 0;
-  transform: translateX(0);
-  background: white;
-  display: flex;
-  align-items: center;
-  overflow-x: scroll;
+@media screen and (max-width: 1410px) {
+  .filter-container {
+    z-index: 3;
+    max-width: unset;
+    width: 100%;
+    height: 5rem;
+    left: 0;
+    bottom: 0;
+    margin-left: 0;
+    margin-top: 0;
+    /* transform: translateX(0); */
+    background: rgb(255, 255, 255);
+    border: 1px solid black;
+    /* display: none; */
+    overflow-x: scroll;
+    display: block;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .filter-container h2 {
