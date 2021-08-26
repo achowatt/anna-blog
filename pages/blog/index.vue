@@ -173,7 +173,6 @@ header {
   }
 
   .filter-search-wrapper {
-    height: 100px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
