@@ -2,30 +2,27 @@
   <main class="blogs-container">
     <header>
       <h1>Blog Posts</h1>
-      <!-- <button class="filter-button" @click="toggleFilter()">
-        filter by topics
-      </button> -->
       <AppSearchInput />
     </header>
     <div class="content-wrapper">
       <div class="filter-container">
         <h2 @click="toggleFilter">Filter</h2>
-        <transition name="fade">
-          <div v-show="showFilter">
-            <button>Javascript</button>
-            <button>Html</button>
-            <button>CSS</button>
-            <button>Accessibity</button>
-            <button>Performance</button>
-            <button>UX/UI</button>
-            <button>Animation</button>
-            <button>Life</button>
-            <button>All</button>
-          </div>
-        </transition>
+        <div v-show="showFilter">
+          <button v-for="t of articleTopics" :key="t" @click="filter(t)">
+            {{ t }}
+          </button>
+          <!-- <button>Html</button>
+          <button>CSS</button>
+          <button>Accessibity</button>
+          <button>Performance</button>
+          <button>UX/UI</button>
+          <button>Animation</button>
+          <button>Life</button>
+          <button>All</button> -->
+        </div>
       </div>
       <ul class="posts-container">
-        <li v-for="article of articles" :key="article.slug">
+        <li v-for="article of filteredArticles" :key="article.slug">
           <NuxtLink
             class="posts"
             :to="{ name: 'blog-slug', params: { slug: article.slug } }"
@@ -35,8 +32,12 @@
             </div>
             <div class="post-details">
               <h2 class="title">{{ article.title }}</h2>
-              <p class="author">by {{ article.author.name }}</p>
               <p class="description">{{ article.description }}</p>
+              <ul class="tag-container">
+                <li v-for="(tag, index) in article.tags" :key="index">
+                  {{ tag }}
+                </li>
+              </ul>
             </div>
           </NuxtLink>
         </li>
@@ -47,14 +48,27 @@
 
 <script>
 export default {
+  layout: "blog",
   data() {
     return {
-      showFilter: false
+      showFilter: false,
+      filterChosen: "",
+      articleTopics: [
+        "javascript",
+        "html",
+        "css",
+        "accessibility",
+        "performance",
+        "UX/UI",
+        "animation",
+        "life",
+        "all"
+      ]
     };
   },
   async asyncData({ $content, params }) {
     const articles = await $content("articles")
-      .only(["title", "description", "img", "slug", "author"])
+      .only(["title", "description", "img", "slug", "tags"])
       .sortBy("createdAt", "asc")
       .fetch();
 
@@ -65,6 +79,23 @@ export default {
   methods: {
     toggleFilter() {
       this.showFilter = !this.showFilter;
+    },
+    filter(topic) {
+      this.filterChosen = topic;
+      let a = this.articles.filter(article =>
+        article.tags.some(tag => tag == topic)
+      );
+    }
+  },
+  computed: {
+    filteredArticles() {
+      if (this.filterChosen == "all" || this.filterChosen == "") {
+        return this.articles;
+      } else {
+        return this.articles.filter(article =>
+          article.tags.some(tag => tag == this.filterChosen)
+        );
+      }
     }
   }
 };
@@ -114,8 +145,8 @@ header {
 
 .filter-container h2 {
   padding: 0.5rem;
-  color: orange;
-  background: white;
+  background: rgb(255, 77, 77);
+  color: white;
   border-radius: 5px;
   box-shadow: 5px 5px 10px rgba(255, 236, 215, 0.678);
   cursor: pointer;
@@ -130,9 +161,9 @@ header {
 }
 
 .filter-container button:hover {
-  background: rgb(255, 223, 163);
+  background: rgb(255, 207, 207);
 }
-
+/* filter mobile */
 @media screen and (max-width: 1410px) {
   .filter-container {
     z-index: 3;
@@ -140,13 +171,9 @@ header {
     width: 100%;
     height: unset;
     left: 0;
-    bottom: 0;
+    top: 0;
     margin-left: 0;
-    margin-top: 0;
-    /* transform: translateX(0); */
-    /* background: rgba(255, 255, 255, 0.699); */
-    /* border: 1px solid black; */
-    /* display: none; */
+    margin-top: 10rem;
     overflow-x: scroll;
     display: flex;
   }
@@ -204,15 +231,37 @@ header {
 }
 
 .post-details .title {
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin: 1rem 0 0 0;
   color: orange;
 }
 
-.post-details .author {
-}
-
 .post-details .description {
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 915px) {
+  .posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .posts {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .post-image {
+    width: 100%;
+  }
+
+  .post-details {
+    width: 100%;
+    margin-left: 1rem;
+  }
 }
 </style>

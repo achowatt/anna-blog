@@ -6,6 +6,8 @@ alt: my first blog post
 author:
   name: Miki
   bio: All about Miki
+tags:
+  - Accessibility
 ---
 
 ## This is a heading

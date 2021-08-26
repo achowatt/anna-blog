@@ -6,6 +6,9 @@ alt: my first blog post
 author:
   name: Miki
   bio: All about Miki
+tags:
+  - css
+  - performance
 ---
 
 ## This is a heading

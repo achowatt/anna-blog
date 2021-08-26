@@ -6,6 +6,8 @@ alt: my first blog post
 author:
   name: Anna Chowattanakul
   bio: Front End Developer
+tags:
+  - javascript
 ---
 
 ## Vue Life Cycles

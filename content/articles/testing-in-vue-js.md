@@ -6,6 +6,9 @@ alt: my first blog post
 author:
   name: Anna
   bio: All about Anna
+tags:
+  - javascript
+  - performance
 ---
 
 ## Getting Started

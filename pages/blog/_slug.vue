@@ -14,15 +14,14 @@
       </nav>
 
       <div class="blog-content">
-        <!-- <img :src="article.img" :alt="article.alt" /> -->
-        <!-- <div
-          class="blog-img"
-          :style="{ backgroundImage: `url(${article.img})` }"
-        > -->
-        <!-- </div> -->
         <h1>{{ article.title }}</h1>
         <p>{{ article.description }}</p>
         <p>Article last updated: {{ formatDate(article.updatedAt) }}</p>
+        <ul class="tag-container">
+          <li v-for="(tag, index) in article.tags" :key="index">
+            {{ tag }}
+          </li>
+        </ul>
 
         <nuxt-content :document="article" />
 
@@ -83,6 +82,34 @@ a.go-home {
 a.go-home:hover {
   transform: translateY(-3px);
   transition: all 0.3s;
+}
+
+.tag-container {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  margin: 1rem 0;
+  color: rgb(0, 171, 250);
+}
+
+.tag-container li {
+  border: 2px solid rgb(0, 171, 250);
+  padding: 0.2rem;
+  min-width: 5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.tag-container li:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.tag-container li:hover {
+  background: rgb(132, 216, 255);
+  color: white;
 }
 
 .blog-article {

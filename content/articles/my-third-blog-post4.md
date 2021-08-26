@@ -6,6 +6,9 @@ alt: my first blog post
 author:
   name: Miki
   bio: All about Miki
+tags:
+  - animation
+  - UX/UI
 ---
 
 ## This is a heading
