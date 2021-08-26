@@ -2,24 +2,18 @@
   <main class="blogs-container">
     <header>
       <h1>Blog Posts</h1>
-      <AppSearchInput />
     </header>
     <div class="content-wrapper">
-      <div class="filter-container">
-        <h2 @click="toggleFilter">Filter</h2>
-        <div v-show="showFilter">
-          <button v-for="t of articleTopics" :key="t" @click="filter(t)">
-            {{ t }}
-          </button>
-          <!-- <button>Html</button>
-          <button>CSS</button>
-          <button>Accessibity</button>
-          <button>Performance</button>
-          <button>UX/UI</button>
-          <button>Animation</button>
-          <button>Life</button>
-          <button>All</button> -->
+      <div class="filter-search-wrapper">
+        <div class="filter-container">
+          <h2 @click="toggleFilter" ref="filterRef">Filter</h2>
+          <div v-if="showFilter">
+            <button v-for="t of articleTopics" :key="t" @click="filter(t)">
+              {{ t }}
+            </button>
+          </div>
         </div>
+        <AppSearchInput />
       </div>
       <ul class="posts-container">
         <li v-for="article of filteredArticles" :key="article.slug">
@@ -62,7 +56,7 @@ export default {
         "UX/UI",
         "animation",
         "life",
-        "all"
+        "no filter"
       ]
     };
   },
@@ -78,6 +72,11 @@ export default {
   },
   methods: {
     toggleFilter() {
+      // if (e.target != this.$refs.filterRef) {
+      //   this.showFilter = false;
+      //   console.log("yo");
+      //   return;
+      // }
       this.showFilter = !this.showFilter;
     },
     filter(topic) {
@@ -90,7 +89,7 @@ export default {
   },
   computed: {
     filteredArticles() {
-      if (this.filterChosen == "all" || this.filterChosen == "") {
+      if (this.filterChosen == "no filter" || this.filterChosen == "") {
         return this.articles;
       } else {
         return this.articles.filter(article =>
@@ -133,6 +132,7 @@ header {
 
 .content-wrapper {
   display: flex;
+  flex-direction: column;
 }
 
 .filter-container {
@@ -167,17 +167,22 @@ header {
 }
 /* filter mobile */
 @media screen and (max-width: 1410px) {
-  .filter-container {
-    z-index: 3;
-    max-width: unset;
-    width: 100%;
-    height: unset;
-    left: 0;
-    top: 0;
-    margin-left: 0;
-    margin-top: 10rem;
-    overflow-x: scroll;
+  .content-wrapper {
     display: flex;
+    flex-direction: column;
+  }
+
+  .filter-search-wrapper {
+    height: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+  }
+
+  .filter-container {
+    all: unset;
+    width: 100%;
+    z-index: 3;
   }
 
   .filter-container > div {
@@ -188,6 +193,7 @@ header {
 
   .filter-container button {
     background: rgba(253, 253, 253, 0.918);
+    border-bottom: solid 1px rgb(255, 223, 163);
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div :class="[searchFocused ? 'focus' : '', 'search']">
+  <div class="search">
     <div class="result-container">
       <input
         v-model="searchQuery"
@@ -8,9 +8,8 @@
         autocomplete="off"
         placeholder="Search Articles"
         @focus="searching()"
-        @blur="stopSearching()"
       />
-      <ul :class="[searchFocused ? 'focus' : '']" v-if="articles.length">
+      <ul v-if="articles.length">
         <li v-for="article of articles" :key="article.slug">
           <NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }">
             {{ article.title }}
@@ -45,14 +44,6 @@ export default {
   methods: {
     searching() {
       this.searchFocused = true;
-      this.$refs.searchBar.style.transform = "scale(2)";
-      this.$refs.searchBar.style.transition = "all 0.3s";
-      this.$refs.searchBar.style.transformOrigin = "100% 50%";
-    },
-    stopSearching() {
-      this.searchFocused = false;
-      this.$refs.searchBar.style.transform = "scale(1)";
-      this.searchQuery = "";
     }
   }
 };
@@ -74,11 +65,6 @@ ul {
   pointer-events: none;
 }
 
-.search.focus {
-  background: rgba(255, 255, 255, 0.616);
-  pointer-events: auto;
-}
-
 .search input {
   height: 2rem;
 }
@@ -93,8 +79,8 @@ ul {
 
 .result-container li {
   background: white;
-  padding: 1rem;
-  border-radius: 3px;
+  padding: 0.5rem;
+  border-bottom: solid 1px rgb(255, 223, 163);
   transition: background 0.3s;
 }
 
@@ -103,8 +89,20 @@ ul {
   transition: background 0.3s;
 }
 
-.result-container ul.focus {
-  transform: scale(2);
-  transform-origin: 100% 0%;
+@media screen and (max-width: 1410px) {
+  .search {
+    all: unset;
+    z-index: 5;
+  }
+
+  .search input {
+    width: 100%;
+    height: 3rem;
+  }
+
+  .result-container {
+    all: unset;
+    /* position: absolute; */
+  }
 }
 </style>
