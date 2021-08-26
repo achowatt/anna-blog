@@ -181,6 +181,7 @@ header {
   }
 
   .filter-container > div {
+    background: rgba(253, 253, 253, 0.918);
     /* display: flex;
     align-items: center; */
   }
