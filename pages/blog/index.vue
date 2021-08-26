@@ -85,6 +85,7 @@ export default {
       let a = this.articles.filter(article =>
         article.tags.some(tag => tag == topic)
       );
+      this.toggleFilter(); //close filter
     }
   },
   computed: {
@@ -125,6 +126,7 @@ header {
 .blogs-container {
   padding: 1rem;
   max-width: 1200px;
+  min-height: calc(100vh - 7rem);
   margin: 0 auto;
   position: relative;
 }
@@ -179,8 +181,8 @@ header {
   }
 
   .filter-container > div {
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
   }
 
   .filter-container button {

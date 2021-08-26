@@ -1,6 +1,6 @@
 ---
 title: Vue 3 Quick Syntax Look Up
-description: Quick reminders for people who have experience with Vue. Not recommended for beginners.
+description: Quick syntax reminders for people who have experience with Vue.
 img: https://res.cloudinary.com/djv69vvs7/image/upload/c_scale,w_695/v1629730831/paul-skorupskas-7KLa-xLbSXA-unsplash_ljdhta.jpg
 alt: my first blog post
 author:
