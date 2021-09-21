@@ -60,20 +60,21 @@ ul {
   position: absolute;
   right: 0;
   top: 0;
-  width: 100%;
   height: 100vh;
   pointer-events: none;
 }
 
 .search input {
   height: 2rem;
+  border-radius: 5px;
+  border: 1px solid rgb(255, 201, 179);
+  padding: 0 1rem;
 }
 
 .result-container {
   position: absolute;
   top: 3.5rem;
   right: 1rem;
-  width: 10rem;
   pointer-events: auto;
 }
 

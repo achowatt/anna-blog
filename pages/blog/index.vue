@@ -6,14 +6,22 @@
     <div class="content-wrapper">
       <div class="filter-search-wrapper">
         <div class="filter-container">
-          <h2 @click="toggleFilter" ref="filterRef">Filter</h2>
+          <h2 @click="toggleFilter" ref="filterRef">
+            {{ filterChosen || "Filter" }}
+          </h2>
           <div v-if="showFilter">
             <button v-for="t of articleTopics" :key="t" @click="filter(t)">
               {{ t }}
             </button>
+            <button @click="filter('')" style="color:red">
+              No Filter
+            </button>
           </div>
         </div>
         <AppSearchInput />
+      </div>
+      <div class="no-blogs" v-if="filteredArticles.length === 0">
+        Sorry there are currently no articles related to "{{ filterChosen }}"
       </div>
       <ul class="posts-container">
         <li v-for="article of filteredArticles" :key="article.slug">
@@ -55,8 +63,7 @@ export default {
         "performance",
         "UX/UI",
         "animation",
-        "life",
-        "no filter"
+        "life"
       ]
     };
   },
@@ -72,11 +79,6 @@ export default {
   },
   methods: {
     toggleFilter() {
-      // if (e.target != this.$refs.filterRef) {
-      //   this.showFilter = false;
-      //   console.log("yo");
-      //   return;
-      // }
       this.showFilter = !this.showFilter;
     },
     filter(topic) {
@@ -89,7 +91,8 @@ export default {
   },
   computed: {
     filteredArticles() {
-      if (this.filterChosen == "no filter" || this.filterChosen == "") {
+      if (this.filterChosen == "") {
+        this.filterChosen = "Filter";
         return this.articles;
       } else {
         return this.articles.filter(article =>
@@ -110,6 +113,14 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.no-blogs {
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  font-size: 3rem;
+  justify-content: center;
 }
 
 .fade-enter-active,
@@ -160,6 +171,7 @@ header {
   padding: 0.7rem;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.479);
+  text-transform: capitalize;
 }
 
 .filter-container button:hover {

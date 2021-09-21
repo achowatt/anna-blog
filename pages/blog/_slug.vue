@@ -56,6 +56,7 @@ export default {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(date).toLocaleDateString("en", options);
     }
+    //todo - toggle nav bar
   },
   mounted() {
     gsap.set(".blog-nav", { xPercent: -100 });
@@ -195,13 +196,26 @@ a.go-home:hover {
   left: -25px;
 }
 
-@media screen and (max-width: 1565px) {
-  /* .blog-nav {
-    width: 40%;
+@media screen and (max-width: 1100px) {
+  .blog-nav {
+    background: white;
+    width: 100%;
+    max-width: 16rem;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    height: 100%;
+    border-left: 1px solid black;
   }
+
+  .blog-nav ul {
+    position: relative;
+  }
+
   .blog-content {
-    width: 60%;
-  } */
+    width: 100%;
+  }
 }
 
 .nuxt-content h2 {
@@ -213,7 +227,6 @@ a.go-home:hover {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #ffc400;
   color: #ffc40067;
-  /* text-shadow: 2px 2px #ffc400; */
 }
 
 .nuxt-content h4 {

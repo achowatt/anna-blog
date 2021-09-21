@@ -47,7 +47,7 @@ body {
   /* font-family: "Lato", sans-serif; */
   font-family: poiret-one, sans-serif;
 
-  background-image: url("flower_flipped.png");
+  background-image: url("../flower_flipped.png");
   background-repeat: no-repeat;
   background-position: 100% 100%;
   background-attachment: fixed;

@@ -16,8 +16,8 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-top: 2px solid rgba(255, 255, 255, 0.637);
+  border-top: 2px solid rgba(255, 146, 3, 0.637);
   color: rgb(255, 94, 0);
-  background: rgba(255, 222, 162, 0.404);
+  background: white;
 }
 </style>
